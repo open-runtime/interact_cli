@@ -57,16 +57,12 @@ class _MultiSelectState extends State<MultiSelect> {
       if (component.defaults!.length != component.options.length) {
         throw Exception(
           'Default selections have a different length of '
-              '${component.defaults!.length} '
-              'than options of ${component.options.length}',
+          '${component.defaults!.length} '
+          'than options of ${component.options.length}',
         );
       } else {
         selection.addAll(
-          component.defaults!
-              .asMap()
-              .entries
-              .where((entry) => entry.value)
-              .map((entry) => entry.key),
+          component.defaults!.asMap().entries.where((entry) => entry.value).map((entry) => entry.key),
         );
       }
     }
@@ -82,10 +78,7 @@ class _MultiSelectState extends State<MultiSelect> {
 
   @override
   void dispose() {
-    final values = selection
-        .map((x) => component.options[x])
-        .map(component.theme.valueStyle)
-        .join(', ');
+    final values = selection.map((x) => component.options[x]).map(component.theme.valueStyle).join(', ');
 
     context.writeln(
       promptSuccess(
