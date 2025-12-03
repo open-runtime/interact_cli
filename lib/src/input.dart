@@ -1,7 +1,6 @@
-import 'package:dart_console/dart_console.dart';
-import 'package:interact_cli/src/framework/framework.dart';
-import 'package:interact_cli/src/theme/theme.dart';
-import 'package:interact_cli/src/utils/prompt.dart';
+import 'framework/framework.dart';
+import 'theme/theme.dart';
+import 'utils/prompt.dart';
 
 /// The error message to be thrown from the [Input] component's
 /// validator when there is an error.
@@ -125,6 +124,6 @@ class _InputState extends State<Input> {
       return value!;
     }
 
-    return "NO INTERACTION";
+    return 'NO INTERACTION';
   }
 }

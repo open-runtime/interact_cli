@@ -1,9 +1,10 @@
 import 'dart:io' show stdout;
 
 import 'package:dart_console/dart_console.dart' show ControlCharacter;
-import 'package:interact_cli/interact_cli.dart' show Select, Theme;
-import 'package:interact_cli/src/framework/framework.dart' show Component, State;
-import 'package:interact_cli/src/utils/prompt.dart' show promptInput, promptSuccess;
+
+import '../interact_cli.dart' show Theme;
+import 'framework/framework.dart' show Component, State;
+import 'utils/prompt.dart' show promptInput, promptSuccess;
 
 /// A selector component.
 class Select extends Component<int> {
