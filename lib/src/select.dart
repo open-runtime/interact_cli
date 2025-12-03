@@ -9,19 +9,10 @@ import 'utils/prompt.dart' show promptInput, promptSuccess;
 /// A selector component.
 class Select extends Component<int> {
   /// Constructs a [Select] component with the default theme.
-  Select({
-    required this.prompt,
-    required this.options,
-    this.initialIndex = 0,
-  }) : theme = Theme.defaultTheme;
+  Select({required this.prompt, required this.options, this.initialIndex = 0}) : theme = Theme.defaultTheme;
 
   /// Constructs a [Select] component with the supplied theme.
-  Select.withTheme({
-    required this.prompt,
-    required this.options,
-    required this.theme,
-    this.initialIndex = 0,
-  });
+  Select.withTheme({required this.prompt, required this.options, required this.theme, this.initialIndex = 0});
 
   /// The theme of the component.
   final Theme theme;
@@ -60,24 +51,13 @@ class _SelectState extends State<Select> {
       index = component.initialIndex;
     }
 
-    context.writeln(
-      promptInput(
-        theme: component.theme,
-        message: component.prompt,
-      ),
-    );
+    context.writeln(promptInput(theme: component.theme, message: component.prompt));
     context.hideCursor();
   }
 
   @override
   void dispose() {
-    context.writeln(
-      promptSuccess(
-        theme: component.theme,
-        message: component.prompt,
-        value: component.options[index],
-      ),
-    );
+    context.writeln(promptSuccess(theme: component.theme, message: component.prompt, value: component.options[index]));
     context.showCursor();
 
     super.dispose();

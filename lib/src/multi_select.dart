@@ -1,25 +1,16 @@
 import 'dart:io' show stdout;
 import 'package:dart_console/dart_console.dart' show ControlCharacter;
-import 'package:interact_cli/interact_cli.dart' show Theme;
-import 'package:interact_cli/src/framework/framework.dart' show Component, State;
-import 'package:interact_cli/src/utils/prompt.dart' show promptInput, promptSuccess;
+import '../interact_cli.dart' show Theme;
+import 'framework/framework.dart' show Component, State;
+import 'utils/prompt.dart' show promptInput, promptSuccess;
 
 /// A multiple select or checkbox input component.
 class MultiSelect extends Component<List<int>> {
   /// Constructs a [MultiSelect] component with the default theme.
-  MultiSelect({
-    required this.prompt,
-    required this.options,
-    this.defaults,
-  }) : theme = Theme.defaultTheme;
+  MultiSelect({required this.prompt, required this.options, this.defaults}) : theme = Theme.defaultTheme;
 
   /// Constructs a [MultiSelect] component with the supplied theme.
-  MultiSelect.withTheme({
-    required this.prompt,
-    required this.options,
-    required this.theme,
-    this.defaults,
-  });
+  MultiSelect.withTheme({required this.prompt, required this.options, required this.theme, this.defaults});
 
   /// The theme of the component.
   final Theme theme;
@@ -61,18 +52,11 @@ class _MultiSelectState extends State<MultiSelect> {
           'than options of ${component.options.length}',
         );
       } else {
-        selection.addAll(
-          component.defaults!.asMap().entries.where((entry) => entry.value).map((entry) => entry.key),
-        );
+        selection.addAll(component.defaults!.asMap().entries.where((entry) => entry.value).map((entry) => entry.key));
       }
     }
 
-    context.writeln(
-      promptInput(
-        theme: component.theme,
-        message: component.prompt,
-      ),
-    );
+    context.writeln(promptInput(theme: component.theme, message: component.prompt));
     context.hideCursor();
   }
 
@@ -80,13 +64,7 @@ class _MultiSelectState extends State<MultiSelect> {
   void dispose() {
     final values = selection.map((x) => component.options[x]).map(component.theme.valueStyle).join(', ');
 
-    context.writeln(
-      promptSuccess(
-        theme: component.theme,
-        message: component.prompt,
-        value: values,
-      ),
-    );
+    context.writeln(promptSuccess(theme: component.theme, message: component.prompt, value: values));
 
     context.showCursor();
     super.dispose();

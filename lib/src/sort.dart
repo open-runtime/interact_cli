@@ -1,24 +1,15 @@
 import 'package:dart_console/dart_console.dart';
-import 'package:interact_cli/src/framework/framework.dart';
-import 'package:interact_cli/src/theme/theme.dart';
-import 'package:interact_cli/src/utils/prompt.dart';
+import 'framework/framework.dart';
+import 'theme/theme.dart';
+import 'utils/prompt.dart';
 
 /// A sortable list component.
 class Sort extends Component<List<String>> {
   /// Constructs a [Sort] component with the default theme.
-  Sort({
-    required this.prompt,
-    required this.options,
-    this.showOutput = true,
-  }) : theme = Theme.defaultTheme;
+  Sort({required this.prompt, required this.options, this.showOutput = true}) : theme = Theme.defaultTheme;
 
   /// Constructs a [Sort] component with the default theme.
-  Sort.withTheme({
-    required this.prompt,
-    required this.options,
-    required this.theme,
-    this.showOutput = true,
-  });
+  Sort.withTheme({required this.prompt, required this.options, required this.theme, this.showOutput = true});
 
   /// The theme of the component.
   final Theme theme;
@@ -53,12 +44,7 @@ class _SortState extends State<Sort> {
     index = 0;
     options = component.options.asMap().entries.map((entry) => entry.key).toList();
 
-    context.writeln(
-      promptInput(
-        theme: component.theme,
-        message: component.prompt,
-      ),
-    );
+    context.writeln(promptInput(theme: component.theme, message: component.prompt));
     context.hideCursor();
   }
 

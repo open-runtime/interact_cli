@@ -1,22 +1,19 @@
 import 'dart:async' show StreamSubscription;
 import 'dart:io' show ProcessSignal;
 
-import 'package:interact_cli/src/framework/framework.dart';
-import 'package:interact_cli/src/theme/theme.dart';
-import 'package:interact_cli/src/utils/utils.dart';
 import 'package:tint/tint.dart';
+
+import 'framework/framework.dart';
+import 'theme/theme.dart';
+import 'utils/utils.dart';
 
 String _prompt(int x) => '';
 
 /// A progress bar component.
 class Progress extends Component<ProgressState> {
   /// Constructs a [Progress] component with the default theme.
-  Progress({
-    required this.length,
-    this.size = 1.0,
-    this.leftPrompt = _prompt,
-    this.rightPrompt = _prompt,
-  }) : theme = Theme.defaultTheme;
+  Progress({required this.length, this.size = 1.0, this.leftPrompt = _prompt, this.rightPrompt = _prompt})
+    : theme = Theme.defaultTheme;
 
   /// Constructs a [Progress] component with the supplied theme.
   Progress.withTheme({
@@ -72,12 +69,7 @@ class Progress extends Component<ProgressState> {
 /// Handles a progress bar's state.
 class ProgressState {
   /// Constructs a [ProgressState] with it's all properties.
-  ProgressState({
-    required this.current,
-    required this.clear,
-    required this.increase,
-    required this.done,
-  });
+  ProgressState({required this.current, required this.clear, required this.increase, required this.done});
 
   /// Current progress.
   int current;
@@ -119,7 +111,8 @@ class _ProgressState extends State<Progress> {
     final line = StringBuffer();
     final leftPrompt = component.leftPrompt(current);
     final rightPrompt = component.rightPrompt(current);
-    final occupied = component.theme.progressPrefix.strip().length +
+    final occupied =
+        component.theme.progressPrefix.strip().length +
         component.theme.progressSuffix.strip().length +
         leftPrompt.strip().length +
         rightPrompt.strip().length;
@@ -127,13 +120,7 @@ class _ProgressState extends State<Progress> {
 
     line.write(leftPrompt);
     line.write(component.theme.progressPrefix);
-    line.write(
-      _progress(
-        component.theme,
-        available,
-        (available / component.length * current).round(),
-      ),
-    );
+    line.write(_progress(component.theme, available, (available / component.length * current).round()));
     line.write(component.theme.progressSuffix);
     line.write(rightPrompt);
 
@@ -174,17 +161,13 @@ class _ProgressState extends State<Progress> {
     return state;
   }
 
-  String _progress(
-    Theme theme,
-    int length,
-    int filled,
-  ) {
+  String _progress(Theme theme, int length, int filled) {
     final f = theme.filledProgressStyle(''.padRight(filled - 1, theme.filledProgress));
     final l = filled == 0
         ? ''
         : filled == length
-            ? theme.filledProgressStyle(theme.filledProgress)
-            : theme.leadingProgressStyle(theme.leadingProgress);
+        ? theme.filledProgressStyle(theme.filledProgress)
+        : theme.leadingProgressStyle(theme.leadingProgress);
     final e = theme.emptyProgressStyle(''.padRight(length - filled, theme.emptyProgress));
 
     return '$f$l$e';

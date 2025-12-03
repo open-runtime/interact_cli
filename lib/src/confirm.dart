@@ -1,24 +1,15 @@
 import 'package:dart_console/dart_console.dart';
-import 'package:interact_cli/src/framework/framework.dart';
-import 'package:interact_cli/src/theme/theme.dart';
-import 'package:interact_cli/src/utils/prompt.dart';
+import 'framework/framework.dart';
+import 'theme/theme.dart';
+import 'utils/prompt.dart';
 
 /// A confirm component.
 class Confirm extends Component<bool> {
   /// Constructs a [Confirm] component with the default theme.
-  Confirm({
-    required this.prompt,
-    this.defaultValue,
-    this.waitForNewLine = false,
-  }) : theme = Theme.defaultTheme;
+  Confirm({required this.prompt, this.defaultValue, this.waitForNewLine = false}) : theme = Theme.defaultTheme;
 
   /// Constructs a [Confirm] component with the supplied theme.
-  Confirm.withTheme({
-    required this.theme,
-    required this.prompt,
-    this.defaultValue,
-    this.waitForNewLine = false,
-  });
+  Confirm.withTheme({required this.theme, required this.prompt, this.defaultValue, this.waitForNewLine = false});
 
   /// The theme of the component.
   final Theme theme;
@@ -51,13 +42,7 @@ class _ConfirmState extends State<Confirm> {
 
   @override
   void dispose() {
-    context.writeln(
-      promptSuccess(
-        theme: component.theme,
-        message: component.prompt,
-        value: answer! ? 'yes' : 'no',
-      ),
-    );
+    context.writeln(promptSuccess(theme: component.theme, message: component.prompt, value: answer! ? 'yes' : 'no'));
     context.showCursor();
 
     super.dispose();
@@ -66,13 +51,7 @@ class _ConfirmState extends State<Confirm> {
   @override
   void render() {
     final line = StringBuffer();
-    line.write(
-      promptInput(
-        theme: component.theme,
-        message: component.prompt,
-        hint: 'y/n',
-      ),
-    );
+    line.write(promptInput(theme: component.theme, message: component.prompt, hint: 'y/n'));
     if (answer != null) {
       line.write(component.theme.defaultStyle(answer! ? 'yes' : 'no'));
     }

@@ -84,10 +84,7 @@ class Context {
   /// for custom use cases, such as accepting initial text as an argument,
   /// and allowing to disable rendering the key press, to use in the [Password]
   /// component.
-  String readLine({
-    String initialText = '',
-    bool noRender = false,
-  }) {
+  String readLine({String initialText = '', bool noRender = false}) {
     var buffer = initialText;
     var index = buffer.length;
 
@@ -105,7 +102,7 @@ class Context {
       if (key.isControl) {
         switch (key.controlChar) {
           case ControlCharacter.enter:
-            writeln("Returning... $buffer");
+            writeln('Returning... $buffer');
             return buffer;
           case ControlCharacter.backspace:
           case ControlCharacter.ctrlH:
@@ -187,10 +184,7 @@ class Context {
 /// containing multiple [BufferContext]s to the console.
 class BufferContext extends Context {
   /// Constructs a [BufferContext] with given properties.
-  BufferContext({
-    required this.buffer,
-    required this.setState,
-  });
+  BufferContext({required this.buffer, required this.setState});
 
   /// Buffer stores the lines written to the context.
   final StringBuffer buffer;

@@ -1,5 +1,5 @@
-import 'package:interact_cli/src/framework/framework.dart';
-import 'package:interact_cli/src/progress.dart';
+import 'framework/framework.dart';
+import 'progress.dart';
 
 /// A shared context and handler for rendering multiple [Progress] bars.
 class MultiProgress {
@@ -38,12 +38,7 @@ class MultiProgress {
     final index = _bars.length;
 
     _lines.add(StringBuffer());
-    progress.setContext(
-      BufferContext(
-        buffer: _lines[index],
-        setState: _render,
-      ),
-    );
+    progress.setContext(BufferContext(buffer: _lines[index], setState: _render));
     _bars.add(progress.interact());
 
     final state = ProgressState(

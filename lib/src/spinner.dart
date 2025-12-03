@@ -1,9 +1,9 @@
 import 'dart:async' show StreamSubscription, Timer;
 import 'dart:io' show ProcessSignal;
 
-import 'package:interact_cli/src/framework/framework.dart';
-import 'package:interact_cli/src/theme/theme.dart';
-import 'package:interact_cli/src/utils/utils.dart';
+import 'framework/framework.dart';
+import 'theme/theme.dart';
+import 'utils/utils.dart';
 
 String _prompt(SpinnerStateType _) => '';
 
@@ -12,19 +12,14 @@ enum SpinnerStateType { inProgress, done, failed }
 /// A spinner or a loading indicator component.
 class Spinner extends Component<SpinnerState> {
   /// Construts a [Spinner] component with the default theme.
-  Spinner({
-    required this.icon,
-    String? failedIcon,
-    this.leftPrompt = _prompt,
-    this.rightPrompt = _prompt,
-  })  : theme = Theme.defaultTheme,
-        failedIcon = failedIcon ?? Theme.defaultTheme.errorPrefix;
+  Spinner({required this.icon, String? failedIcon, this.leftPrompt = _prompt, this.rightPrompt = _prompt})
+    : theme = Theme.defaultTheme,
+      failedIcon = failedIcon ?? Theme.defaultTheme.errorPrefix;
 
   /// Constructs a [Spinner] component with the supplied theme.
   Spinner.withTheme({
     required this.icon,
-    String? failedIcon,
-    required this.theme,
+    required this.theme, String? failedIcon,
     this.leftPrompt = _prompt,
     this.rightPrompt = _prompt,
   }) : failedIcon = failedIcon ?? Theme.defaultTheme.errorPrefix;
@@ -125,16 +120,11 @@ class _SpinnerState extends State<Spinner> {
 
   @override
   SpinnerState interact() {
-    final timer = Timer.periodic(
-      Duration(
-        milliseconds: component.theme.spinningInterval,
-      ),
-      (timer) {
-        setState(() {
-          index = (index + 1) % component.theme.spinners.length;
-        });
-      },
-    );
+    final timer = Timer.periodic(Duration(milliseconds: component.theme.spinningInterval), (timer) {
+      setState(() {
+        index = (index + 1) % component.theme.spinners.length;
+      });
+    });
 
     final state = SpinnerState(
       done: () {

@@ -15,12 +15,7 @@ class ValidationError {
 /// An input component.
 class Input extends Component<String> {
   /// Constructs an [Input] component with the default theme.
-  Input({
-    required this.prompt,
-    this.validator,
-    this.initialText = '',
-    this.defaultValue,
-  }) : theme = Theme.defaultTheme;
+  Input({required this.prompt, this.validator, this.initialText = '', this.defaultValue}) : theme = Theme.defaultTheme;
 
   /// Constructs an [Input] component with the supplied theme.
   Input.withTheme({
@@ -67,13 +62,7 @@ class _InputState extends State<Input> {
   @override
   void dispose() {
     if (value != null) {
-      context.writeln(
-        promptSuccess(
-          theme: component.theme,
-          message: component.prompt,
-          value: value!,
-        ),
-      );
+      context.writeln(promptSuccess(theme: component.theme, message: component.prompt, value: value!));
     }
     super.dispose();
   }
@@ -81,12 +70,7 @@ class _InputState extends State<Input> {
   @override
   void render() {
     if (error != null) {
-      context.writeln(
-        promptError(
-          theme: component.theme,
-          message: error!,
-        ),
-      );
+      context.writeln(promptError(theme: component.theme, message: error!));
     }
   }
 
@@ -94,13 +78,7 @@ class _InputState extends State<Input> {
   String interact() {
     // while last key is null or not a control key we continue
     while (true) {
-      context.write(
-        promptInput(
-          theme: component.theme,
-          message: component.prompt,
-          hint: component.defaultValue,
-        ),
-      );
+      context.write(promptInput(theme: component.theme, message: component.prompt, hint: component.defaultValue));
 
       final input = context.readLine(initialText: component.initialText);
 

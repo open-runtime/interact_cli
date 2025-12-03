@@ -117,8 +117,7 @@ class Theme {
     StyleFunction? leadingProgressStyle,
     List<String>? spinners,
     int? spinningInterval,
-  }) {
-    return Theme(
+  }) => Theme(
       inputPrefix: inputPrefix ?? this.inputPrefix,
       inputSuffix: inputSuffix ?? this.inputSuffix,
       successPrefix: successPrefix ?? this.successPrefix,
@@ -150,7 +149,6 @@ class Theme {
       spinners: spinners ?? this.spinners,
       spinningInterval: spinningInterval ?? this.spinningInterval,
     );
-  }
 
   /// An alias to [colorfulTheme].
   static Theme defaultTheme = colorfulTheme;

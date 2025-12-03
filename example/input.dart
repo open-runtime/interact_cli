@@ -18,15 +18,9 @@ void main() {
   ).interact();
   stdout.writeln(email);
 
-  final planet = Input(
-    prompt: 'Your planet',
-    defaultValue: 'Earth',
-  ).interact();
+  final planet = Input(prompt: 'Your planet', defaultValue: 'Earth').interact();
   stdout.writeln(planet);
 
-  final galaxy = Input(
-    prompt: 'Your galaxy',
-    initialText: 'Andromeda',
-  ).interact();
+  final galaxy = Input(prompt: 'Your galaxy', initialText: 'Andromeda').interact();
   stdout.writeln(galaxy);
 }

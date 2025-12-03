@@ -6,9 +6,7 @@ import 'package:interact_cli/interact_cli.dart';
 void main() {
   final theme = Theme.basicTheme;
 
-  stdout.writeln(
-    'This utility will walk you through creating a package.json file.',
-  );
+  stdout.writeln('This utility will walk you through creating a package.json file.');
   stdout.writeln();
   stdout.writeln('Press ^C at any time to quit.');
 
@@ -36,37 +34,17 @@ void main() {
     },
   ).interact();
 
-  final description = Input.withTheme(
-    theme: theme,
-    prompt: 'description',
-  ).interact();
+  final description = Input.withTheme(theme: theme, prompt: 'description').interact();
 
-  final entry = Input.withTheme(
-    theme: theme,
-    prompt: 'entry point',
-    defaultValue: 'index.js',
-  ).interact();
+  final entry = Input.withTheme(theme: theme, prompt: 'entry point', defaultValue: 'index.js').interact();
 
-  final testCommand = Input.withTheme(
-    theme: theme,
-    prompt: 'test command',
-  ).interact();
+  final testCommand = Input.withTheme(theme: theme, prompt: 'test command').interact();
 
-  final repo = Input.withTheme(
-    theme: theme,
-    prompt: 'git repository',
-  ).interact();
+  final repo = Input.withTheme(theme: theme, prompt: 'git repository').interact();
 
-  final keywords = Input.withTheme(
-    theme: theme,
-    prompt: 'keywords',
-  ).interact();
+  final keywords = Input.withTheme(theme: theme, prompt: 'keywords').interact();
 
-  final license = Input.withTheme(
-    theme: theme,
-    prompt: 'license',
-    defaultValue: 'ISC',
-  ).interact();
+  final license = Input.withTheme(theme: theme, prompt: 'license', defaultValue: 'ISC').interact();
 
   stdout.writeln('About to write this to package.json:');
 
@@ -75,10 +53,7 @@ void main() {
     'version': version,
     'description': description,
     'entry': entry,
-    'repository': <String, String>{
-      'type': 'git',
-      'url': repo,
-    },
+    'repository': <String, String>{'type': 'git', 'url': repo},
     'scripts': <String, String>{
       'test': testCommand.isNotEmpty ? testCommand : 'echo "Error: no test specified" && exit 1',
     },

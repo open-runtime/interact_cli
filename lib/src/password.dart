@@ -1,16 +1,12 @@
-import 'package:interact_cli/src/framework/framework.dart';
-import 'package:interact_cli/src/theme/theme.dart';
-import 'package:interact_cli/src/utils/prompt.dart';
+import 'framework/framework.dart';
+import 'theme/theme.dart';
+import 'utils/prompt.dart';
 
 /// A password input component.
 class Password extends Component<String> {
   /// Constructs a [Password] component with the default theme.
-  Password({
-    required this.prompt,
-    this.confirmation = false,
-    this.confirmPrompt,
-    this.confirmError,
-  }) : theme = Theme.defaultTheme;
+  Password({required this.prompt, this.confirmation = false, this.confirmPrompt, this.confirmError})
+    : theme = Theme.defaultTheme;
 
   /// Constructs a [Password] component with the supplied theme.
   Password.withTheme({
@@ -54,11 +50,7 @@ class _PasswordState extends State<Password> {
   @override
   void dispose() {
     context.writeln(
-      promptSuccess(
-        theme: component.theme,
-        message: component.prompt,
-        value: component.theme.hiddenPrefix,
-      ),
+      promptSuccess(theme: component.theme, message: component.prompt, value: component.theme.hiddenPrefix),
     );
 
     super.dispose();
@@ -67,12 +59,7 @@ class _PasswordState extends State<Password> {
   @override
   void render() {
     if (hasError) {
-      context.writeln(
-        promptError(
-          theme: component.theme,
-          message: component.confirmError ?? 'Passwords do not match',
-        ),
-      );
+      context.writeln(promptError(theme: component.theme, message: component.confirmError ?? 'Passwords do not match'));
     }
   }
 
@@ -80,22 +67,12 @@ class _PasswordState extends State<Password> {
   String interact() {
     while (true) {
       hasError = false;
-      context.write(
-        promptInput(
-          theme: component.theme,
-          message: component.prompt,
-        ),
-      );
+      context.write(promptInput(theme: component.theme, message: component.prompt));
 
       final password = context.readLine(noRender: true);
 
       if (component.confirmation) {
-        context.write(
-          promptInput(
-            theme: component.theme,
-            message: component.confirmPrompt ?? component.prompt,
-          ),
-        );
+        context.write(promptInput(theme: component.theme, message: component.confirmPrompt ?? component.prompt));
 
         final repeated = context.readLine(noRender: true);
 
